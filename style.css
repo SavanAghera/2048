@@ -1,0 +1,20 @@
+#main {
+    background-color: rgb(228, 159, 113);
+    display: table;
+}
+
+.cell-div {
+    width: 98px;
+    height: 98px;
+    border: 1px solid rgb(172, 101, 21);
+    display: table-cell;
+    color: rgb(240, 236, 232);
+    text-align: center;
+    vertical-align: middle;
+}
+.cell-div span {
+    font-size: xx-large;
+}
+.row-div{
+    display: table-row;
+}
