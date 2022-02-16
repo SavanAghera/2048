@@ -1,14 +1,16 @@
 const mainDiv = document.getElementById('main');
 mainDiv.style.width = '400px';
 mainDiv.style.height = '400px';
-let data = [
-    [0, 0, 0, 0],
-    [0, 2, 0, 0],
-    [0, 0, 0, 0],
-    [0, 2, 2, 4]
-];
+let data = []
 const temp = [0, 0, 0, 0]
 function renderDiv() {
+    data = [
+        [0, 0, 0, 0],
+        [0, 2, 0, 0],
+        [0, 0, 0, 0],
+        [0, 2, 2, 4]
+    ]
+    mainDiv.innerHTML = '';
     for (let i = 0; i < 4; i++) {
         const rowDiv = document.createElement('div');
         rowDiv.className = 'row-div'
@@ -25,7 +27,7 @@ function renderData() {
     let isBlockAdded = false;
     for (let i = 0; i < 4; i++) {
         for (let j = 0; j < 4; j++) {
-            if(data[i][j] === 0 && !isBlockAdded) {
+            if (data[i][j] === 0 && !isBlockAdded) {
                 data[i][j] = 2;
                 isBlockAdded = true;
             }
@@ -33,11 +35,16 @@ function renderData() {
             if (data[i][j] !== 0) {
                 subDiv.style.backgroundColor = '#f29857'
                 subDiv.innerHTML = `<span>${data[i][j]}</span>`
-            }else {
+            } else {
                 subDiv.style.backgroundColor = 'rgb(228, 159, 113)'
                 subDiv.innerHTML = ''
-            }        
+            }
         }
+    }
+    if (!isBlockAdded) {
+        alert('game over');
+        renderDiv();
+        renderData();
     }
 }
 window.addEventListener('keyup', (event) => {
