@@ -9,20 +9,25 @@ let data = [
 ];
 const temp = [0, 0, 0, 0]
 function render() {
+    let isBlockAdded = false;
     mainDiv.innerHTML = ''
     for (let i = 0; i < 4; i++) {
         const rowDiv = document.createElement('div');
         rowDiv.className = 'row-div'
         mainDiv.appendChild(rowDiv);
         for (let j = 0; j < 4; j++) {
+            if(data[i][j] === 0 && !isBlockAdded) {
+                data[i][j] = 2;
+                isBlockAdded = true;
+            }
             const subDiv = document.createElement('div');
             subDiv.className = 'cell-div'
             subDiv.id = `cell_${i}_${j}`;
             if (data[i][j] !== 0) {
-            subDiv.style.backgroundColor = '#f29857'
-            subDiv.innerHTML = `<span>${data[i][j]}</span>`
-
+                subDiv.style.backgroundColor = '#f29857'
+                subDiv.innerHTML = `<span>${data[i][j]}</span>`
             }
+        
             rowDiv.appendChild(subDiv);
         }
     }
@@ -61,11 +66,11 @@ function moveDown() {
 }
 function moveDataRight() {
     for (let i = 0; i < 4; i++) {
-        data[i] = data[i].filter(e => e !== 0).reverse().map((v,i,arr) => {
-            if(v === arr[i+1]) {
-                arr[i+1] = 0
-                return v*=2;  
-            } 
+        data[i] = data[i].filter(e => e !== 0).reverse().map((v, i, arr) => {
+            if (v === arr[i + 1]) {
+                arr[i + 1] = 0
+                return v *= 2;
+            }
             else return v;
         }).reverse();
         data[i] = [...temp.slice(0, 4 - data[i].length), ...data[i]];
@@ -73,11 +78,11 @@ function moveDataRight() {
 }
 function moveDataLeft() {
     for (let i = 0; i < 4; i++) {
-        data[i] = data[i].map((v,i,arr) => {
-            if(v === arr[i+1]) {
-                arr[i+1] = 0
-                return v*=2;  
-            } 
+        data[i] = data[i].map((v, i, arr) => {
+            if (v === arr[i + 1]) {
+                arr[i + 1] = 0
+                return v *= 2;
+            }
             else return v;
         }).filter(e => e !== 0);
         data[i] = [...data[i], ...temp.slice(0, 4 - data[i].length)];
