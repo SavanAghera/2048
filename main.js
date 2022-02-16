@@ -1,4 +1,5 @@
 const mainDiv = document.getElementById('main');
+const score = document.getElementById('score');
 mainDiv.style.width = '400px';
 mainDiv.style.height = '400px';
 let data = []
@@ -82,7 +83,8 @@ function moveDataRight() {
     for (let i = 0; i < 4; i++) {
         data[i] = data[i].filter(e => e !== 0).reverse().map((v, i, arr) => {
             if (v === arr[i + 1]) {
-                arr[i + 1] = 0
+                arr[i + 1] = 0;
+                score.innerText = score.innerText *1 + v*2;
                 return v *= 2;
             }
             else return v;
@@ -95,6 +97,7 @@ function moveDataLeft() {
         data[i] = data[i].map((v, i, arr) => {
             if (v === arr[i + 1]) {
                 arr[i + 1] = 0
+                score.innerText = score.innerText *1 + v*2;
                 return v *= 2;
             }
             else return v;
