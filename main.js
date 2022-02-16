@@ -8,31 +8,38 @@ let data = [
     [0, 2, 2, 4]
 ];
 const temp = [0, 0, 0, 0]
-function render() {
-    let isBlockAdded = false;
-    mainDiv.innerHTML = ''
+function renderDiv() {
     for (let i = 0; i < 4; i++) {
         const rowDiv = document.createElement('div');
         rowDiv.className = 'row-div'
         mainDiv.appendChild(rowDiv);
         for (let j = 0; j < 4; j++) {
-            if(data[i][j] === 0 && !isBlockAdded) {
-                data[i][j] = 2;
-                isBlockAdded = true;
-            }
             const subDiv = document.createElement('div');
             subDiv.className = 'cell-div'
             subDiv.id = `cell_${i}_${j}`;
-            if (data[i][j] !== 0) {
-                subDiv.style.backgroundColor = '#f29857'
-                subDiv.innerHTML = `<span>${data[i][j]}</span>`
-            }
-        
             rowDiv.appendChild(subDiv);
         }
     }
 }
-
+function renderData() {
+    let isBlockAdded = false;
+    for (let i = 0; i < 4; i++) {
+        for (let j = 0; j < 4; j++) {
+            if(data[i][j] === 0 && !isBlockAdded) {
+                data[i][j] = 2;
+                isBlockAdded = true;
+            }
+            const subDiv = document.getElementById(`cell_${i}_${j}`);
+            if (data[i][j] !== 0) {
+                subDiv.style.backgroundColor = '#f29857'
+                subDiv.innerHTML = `<span>${data[i][j]}</span>`
+            }else {
+                subDiv.style.backgroundColor = 'rgb(228, 159, 113)'
+                subDiv.innerHTML = ''
+            }        
+        }
+    }
+}
 window.addEventListener('keyup', (event) => {
     const keyCode = event.keyCode;
     if (keyCode === 37) moveLeft();
@@ -41,28 +48,28 @@ window.addEventListener('keyup', (event) => {
     else if (keyCode === 40) moveDown()
 });
 
-render();
-
+renderDiv();
+renderData();
 function moveLeft() {
     moveDataLeft()
-    render();
+    renderData();
 }
 function moveUp() {
     data = rotate90();
     moveDataRight();
     data = rotateNegetive90();
-    render();
+    renderData();
 }
 function moveRight() {
     moveDataRight();
-    render();
+    renderData();
 
 }
 function moveDown() {
     data = rotate90();
     moveDataLeft();
     data = rotateNegetive90();
-    render();
+    renderData();
 }
 function moveDataRight() {
     for (let i = 0; i < 4; i++) {
