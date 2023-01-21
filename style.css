@@ -1,5 +1,5 @@
 #main {
-    background-color: rgb(228, 159, 113);
+    background-color: rgb(246, 228, 215);
     display: table;
 }
 
@@ -8,7 +8,7 @@
     height: 98px;
     border: 1px solid rgb(172, 101, 21);
     display: table-cell;
-    color: rgb(240, 236, 232);
+    color: rgb(252, 233, 215);
     text-align: center;
     vertical-align: middle;
 }

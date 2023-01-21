@@ -34,7 +34,7 @@ function renderData() {
             }
             const subDiv = document.getElementById(`cell_${i}_${j}`);
             if (data[i][j] !== 0) {
-                subDiv.style.backgroundColor = '#f29857'
+                subDiv.style.backgroundColor = shadeColor('#FF9E00', -data[i][j])
                 subDiv.innerHTML = `<span>${data[i][j]}</span>`
             } else {
                 subDiv.style.backgroundColor = 'rgb(228, 159, 113)'
@@ -48,6 +48,15 @@ function renderData() {
         renderData();
     }
 }
+function shadeColor(color, weight) {
+    let num = parseInt(color.slice(1),16),
+    amt = Math.round(0.5 * weight),
+    R = (num >> 16) + amt,
+    B = (num >> 8 & 0x00FF) + amt,
+    G = (num & 0x0000FF) + amt;
+    return "#" + (0x1000000 + (R<255?R<1?0:R:255)*0x10000 + (B<255?B<1?0:B:255)*0x100 + (G<255?G<1?0:G:255)).toString(16).slice(1);
+}
+
 window.addEventListener('keyup', (event) => {
     const keyCode = event.keyCode;
     if (keyCode === 37) moveLeft();
